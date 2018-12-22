@@ -1,0 +1,19 @@
+
+NPM versioning:
+^4.13.1 - the ^ means use the major version 4.x.x
+~4.13.x - the ~ means ues the build version 4.13.x
+no prefix - use the exact version
+
+npm command options
+    i - install
+    rm - remove/uninstall
+
+    -S, --save - save to package.json
+    -g - save globally
+
+npmrc
+    ~/.npmrc
+        progress=false
+        save=true - save w/out having to explicitly do --save
+        save-exact=true - save the exact version... we want false usually
+        
