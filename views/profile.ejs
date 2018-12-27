@@ -30,15 +30,20 @@
             <div class="row">
                 <div class="col-lg-12">
                     <header>
-                        <h1>Welcome <%= (user != undefined) ? user.displayName : '' %> to Node-Express</h1>
+                        <h3>Welcome to your Node-Express Profile, <%= user.displayName %></h3>
                     </header>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <% if(!user) { %>
-                        <a class="login-button" href="/auth/login">Login</a>
-                    <% } %>
+                    <img src="<%= user._json.image.url %>"/>
+                    <div class="username"><%= user.displayName %></div>
+                    <br/><br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p><%= user.emails[0].value %></p>
                 </div>
             </div>
         </div>
