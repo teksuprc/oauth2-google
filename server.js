@@ -13,7 +13,7 @@ const path = require('path');
 const passport = require('passport');
 //const session = require('express-session');
 const session = require('cookie-session');
-const passportSetup = require('./config/passport-setup')();
+const passportSetup = require('./config/googleStrategy')();
 const authRoutes = require('./routes/auth-routes');
 const keys = require('./config/keys');
 
@@ -21,7 +21,8 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'ejs');
-//app.set('views', 'views');
+app.set('views', 'views');
+
 
 // jquery
 app.use('/js', express.static(path.join(__dirname, 'node_modules', 'jquery/dist')));
@@ -54,6 +55,16 @@ app.use(passport.session());
 app.use('/auth', authRoutes.router);
 app.use(morgan('tiny'));    // dev, tiny, combined
 
+/*
+app.options('*', cors());
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    next();
+});
+*/
 
 app.get('/', (req, res) => {
     res.render('index', {user: req.user});

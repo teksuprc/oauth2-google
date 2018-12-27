@@ -5,6 +5,8 @@
 const express = require('express');
 const router = express.Router();
 
+const version = '0.0.1';
+
 
 router.get('/messages', (req, res) => {
     res.send('getting messages');
