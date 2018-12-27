@@ -22,7 +22,6 @@
                         <% } else { %>
                             <li class="nav-item"><a class="nav-link" href="/auth/logout">Logout</a></li>
                             <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/api">API</a></li>
                         <% } %>
                     </ul>
                 </div>
@@ -30,22 +29,45 @@
             <div class="row">
                 <div class="col-lg-12">
                     <header>
-                        <h3>Welcome to your Node-Express Profile, <%= user.displayName %></h3>
+                        <h3><%= user.displayName %> Welcome to the API page.</h3>
                     </header>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <img src="<%= user._json.image.url %>"/>
-                    <div class="username"><%= user.displayName %></div>
-                    <br/><br/>
+                <div class="col-lg-6">
+                    <div style="border: 2px solid #777; width: 320px; padding: 20px; ">
+                        <a class="nav-link" href="/api/messages">Get Messages</a>
+                    </div>
+                    <div style="border: 2px solid #777; width: 320px; padding: 20px; margin-top: 5px;">
+                        <p>Get Message By Id</p>
+                        <input id="msgId" type="text" placeholder="value" maxlength="5" required/>
+                        <button type="button" onclick="getMessageById();">Get Message</button>
+                    </div>
+                    <div style="border: 2px solid #777; width: 320px; padding: 20px; margin-top: 5px;">
+                        <p>Put Message</p>
+                        <form method="POST" action="/api/message">
+                            <label>Message</label>
+                            <input id="formMsgInput" type="text" placeholder="value" maxlength="25" require/>
+                            <input type="submit" value="Submit"/>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p><%= user.emails[0].value %></p>
+                <div class="col-lg-6">
+                    <div>
+                        <p>Version: <%= data.version %></p>
+                        <br/><br/>
+                        <p>Message: <%= data.message %></p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            function getMessageById() {
+                console.log('get msg');
+                let val = document.getElementById('msgId').value;
+                window.location = '/api/message/' + val;
+            };
+        </script>
     </body>
 </html>

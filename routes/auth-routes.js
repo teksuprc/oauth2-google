@@ -28,13 +28,14 @@ router.get('/google/callback', passport.authenticate('google'), (req, res) => {
         res.render('profile', {user: user});
     }
     else {
-        res.redirect('/login');
+        res.redirect('/auth/login');
     }
 });
 
+// need to validate the actual user w/ the req.user
 let isAuthenticated = (req, res, next) => {
     if(req.user == undefined)
-        res.render('/login');
+        res.redirect('/auth/login');
     else 
         next();
 };

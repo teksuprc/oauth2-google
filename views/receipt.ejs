@@ -22,7 +22,6 @@
                         <% } else { %>
                             <li class="nav-item"><a class="nav-link" href="/auth/logout">Logout</a></li>
                             <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/api">API</a></li>
                         <% } %>
                     </ul>
                 </div>
@@ -30,15 +29,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <header>
-                        <h1>Welcome <%= (user != undefined) ? user.displayName : '' %> to Node-Express</h1>
+                        <h3><%= user.displayName %> thank you for posting your data.</h3>
                     </header>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <% if(!user) { %>
-                        <a class="login-button" href="/auth/login">Login</a>
-                    <% } %>
+                    <p><%= data.version %>"/></p>
+                    <p><%= data.message %>"/></p>
                 </div>
             </div>
         </div>
