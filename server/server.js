@@ -6,19 +6,21 @@
  *          nodemon server.js
  *          node server.js
  */
+const btoa = require('btoa');
+const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const passport = require('passport');
-//const session = require('express-session');
 const session = require('cookie-session');
-const cors = require('cors');
+
 const passportSetup = require('../config/googleStrategy')();
 const authRoutes = require('../routes/auth-routes');
 const apiRoutes = require('../routes/api-routes');
 const keys = require('../config/keys');
 
 const app = express();
+
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.set('view engine', 'ejs');

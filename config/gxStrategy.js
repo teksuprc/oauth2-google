@@ -45,7 +45,7 @@ module.exports = function() {
             passReqToCallback: true
         }, 
         //(request, accessToken, refreshToken, profile, done) => {
-        (request, accessToken, refreshToken, profile, done) => {
+        (accessToken, refreshToken, profile, done) => {
             let user = findOrCreateUser(profile, done);
             if(user != undefined)
                 done(null, user);

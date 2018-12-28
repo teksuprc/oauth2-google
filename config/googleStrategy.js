@@ -28,10 +28,9 @@ module.exports = function() {
         done(null, user.id);
     });
 
-    passport.deserializeUser((obj, done) => {
-        let user = users[obj];
-        if(user != undefined)
-            done(null, user);
+    passport.deserializeUser((id, done) => {
+        if(users[id] != undefined)
+            done(null, users[id]);
         else
             done(null, false);
     });
