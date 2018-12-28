@@ -11,6 +11,7 @@ const router = express.Router();
 
 let passClientIdSecret = ((req, res, next) => {
     // base64 of client id and secret
+    // WARNING: use HTTPS or else we are sending base64 text in the clear
     let b64 = base64.encode(`${keys.gx.client_id}:${keys.gx.client_secret}`);
     res.header('Authorization', `Basic ${b64}`);
     next();
