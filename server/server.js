@@ -13,10 +13,12 @@ const path = require('path');
 const passport = require('passport');
 const session = require('cookie-session');
 
-const passportSetup = require('../config/googleStrategy')();
+//const passportSetup = require('../config/googleStrategy')();
+const passportGXSetup = require('../config/gxStrategy')();
 const authRoutes = require('../routes/auth-routes');
+const gxRoutes = require('../routes/gx-routes');
 const apiRoutes = require('../routes/api-routes');
-const keys = require('../config/keys');
+const keys = require('../config/vcap-utils');
 
 const app = express();
 
@@ -43,7 +45,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     name: keys.session.name,
-    //secure: true,                     // TODO: uncomment when using https
+    secure: keys.session.secure,                     // TODO: uncomment when using https
     httpOnly: true,
     sameSite: 'strict',
     domain: keys.session.domain,
@@ -53,7 +55,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/auth', authRoutes.router);
+//app.use('/auth', authRoutes.router);
+app.use('/auth', gxRoutes.router);
 app.use('/api', apiRoutes.router);
 app.use(morgan('tiny'));    // dev, tiny, combined
 

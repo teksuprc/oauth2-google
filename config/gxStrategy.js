@@ -1,12 +1,12 @@
 /**
  * passport-setup.js
- * @desc - This module sets up passport and the google oauth20 stategy.
+ * @desc - This module sets up passport and the gx oauth20 stategy.
  * usage: 
  *  const passportSetup = require('./config/passport-setup')();
  */
 const passport = require('passport');
 const Strategy = require('passport-oauth2').Strategy;
-const keys = require('./keys');
+const keys = require('./vcap-utils');
 
 module.exports = function() {
 
@@ -44,7 +44,6 @@ module.exports = function() {
             tokenURL: keys.gx.tokenURL,
             passReqToCallback: true
         }, 
-        //(request, accessToken, refreshToken, profile, done) => {
         (accessToken, refreshToken, profile, done) => {
             let user = findOrCreateUser(profile, done);
             if(user != undefined)

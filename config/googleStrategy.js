@@ -6,7 +6,7 @@
  */
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./keys');
+const keys = require('../config/vcap-utils');
 
 module.exports = function() {
 
@@ -36,9 +36,9 @@ module.exports = function() {
     });
 
     passport.use(new GoogleStrategy({
-            clientID: keys.google.client_id,
-            clientSecret: keys.google.client_secret,
-            callbackURL: keys.google.redirect_url,
+            clientID: keys.gx.client_id,
+            clientSecret: keys.gx.client_secret,
+            callbackURL: keys.gx.callbackURL,
             passReqToCallback: true
         }, (request, accessToken, refreshToken, profile, done) => {
             let user = findOrCreateUser(profile, done);
